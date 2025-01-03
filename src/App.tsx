@@ -6,7 +6,7 @@ import JobDetails from "./pages/JobDetails";
 function App() {
   return (
     <>
-      <h1 className="flex items-center">
+      <h1 className="flex items-center bg-white border-b-2">
         <img src="/nextJob-NBG.png" height="72" width="72" />
         <span className="font-medium text-4xl bg-gradient-to-br from-[#002642] via-[#2fb1df] to-[#002642] bg-clip-text text-transparent">
           NextJob
@@ -22,4 +22,3 @@ function App() {
 }
 
 export default App;
-
