@@ -1,5 +1,7 @@
 import { Form, Button, Input, Radio } from "antd";
 import { useState } from "react";
+import { createJob } from "../utils";
+import { formatPayload } from "../utils";
 
 export default function CreateJob() {
   const [form] = Form.useForm();
@@ -28,7 +30,8 @@ export default function CreateJob() {
         );
       }}
       onFinish={(value: any) => {
-        console.log("yo", value);
+        const payload = formatPayload({ jobObj: value });
+        createJob({ payload });
       }}
       form={form}
       autoComplete="off"
@@ -47,25 +50,11 @@ export default function CreateJob() {
         <Input className="text-base" />
       </Form.Item>
 
-      <Form.Item
-        label="Slug"
-        name="slug"
-        rules={[
-          {
-            required: true,
-            message: "Slug is required",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input className="text-base" />
-      </Form.Item>
-
       <div className="flex mb-6">
         <div className="w-1/2">
           <Form.Item
-            label="Job Type"
-            name="jobType"
+            label="Work Mode"
+            name="workMode"
             rules={[{ required: true, message: "Select a Job type" }]}
           >
             <Radio.Group
@@ -80,16 +69,38 @@ export default function CreateJob() {
           </Form.Item>
 
           <Form.Item
-            label="Job Location"
-            name="location"
+            label="Slug"
+            name="slug"
+            rules={[
+              {
+                required: true,
+                message: "Slug is required",
+                whitespace: true,
+              },
+            ]}
             className="w-11/12 mr-auto"
           >
             <Input className="text-base" />
           </Form.Item>
 
           <Form.Item
-            label="Apply Link"
-            name="applyLink"
+            label="Company"
+            name="company"
+            rules={[
+              {
+                required: true,
+                message: "Company name is required",
+                whitespace: true,
+              },
+            ]}
+            className="w-11/12 mr-auto"
+          >
+            <Input className="text-base" />
+          </Form.Item>
+
+          <Form.Item
+            label="Job Location"
+            name="location"
             className="w-11/12 mr-auto"
           >
             <Input className="text-base" />
@@ -98,8 +109,8 @@ export default function CreateJob() {
 
         <div className="w-1/2 border-l border-solid border-silver">
           <Form.Item
-            label="Role Type"
-            name="employmentType"
+            label="Job Type"
+            name="jobType"
             rules={[{ required: true, message: "Select a Job type" }]}
             className="w-11/12 ml-auto"
           >
@@ -112,6 +123,15 @@ export default function CreateJob() {
               <Radio value={"Part Time"}>Part Time</Radio>
               <Radio value={"Internship"}>Internship</Radio>
             </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            label="Apply Link"
+            name="applyLink"
+            rules={[{ required: true, message: "Apply Link is required" }]}
+            className="w-11/12 ml-auto"
+          >
+            <Input className="text-base" />
           </Form.Item>
 
           <Form.Item label="Salary" name="salary" className="w-11/12 ml-auto">
@@ -130,7 +150,7 @@ export default function CreateJob() {
 
       <Form.Item
         label="Job Description"
-        name="description"
+        name="desc"
         rules={[
           {
             required: true,
@@ -152,7 +172,7 @@ export default function CreateJob() {
         rules={[
           {
             required: true,
-            message: "Job Description is required",
+            message: "Job Requirements are required",
             whitespace: true,
           },
         ]}
@@ -170,7 +190,7 @@ export default function CreateJob() {
         rules={[
           {
             required: true,
-            message: "Job Description is required",
+            message: "JobResponsibilities are required",
             whitespace: true,
           },
         ]}
