@@ -9,6 +9,10 @@ const jobsService = {
     );
     return res?.data;
   },
+  getJobs: async () => {
+    const res = await axios.get("http://localhost:3000/v1/jobs/all-jobs");
+    return res?.data;
+  },
 };
 
 export { jobsService };

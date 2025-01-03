@@ -1,14 +1,5 @@
 import { jobsService } from "../service";
-import { JobPayload } from "../types/jobs";
-
-export const createJob = async ({ payload }: { payload: any }) => {
-  const res = await jobsService.createJob({ payload });
-  if (res?.success) {
-    console.log("Posted SUccessfully");
-  } else {
-    console.log(res ? res.message : "Error");
-  }
-};
+import { JobPayload, JobReqPayload } from "../types/jobs";
 
 export const formatPayload = ({ jobObj }: { jobObj: JobPayload }) => {
   return {
@@ -26,4 +17,30 @@ export const formatPayload = ({ jobObj }: { jobObj: JobPayload }) => {
     company: jobObj?.company?.trim(),
     slug: jobObj?.slug?.trim(),
   };
+};
+
+export const createJob = async ({ payload }: { payload: JobReqPayload }) => {
+  const res = await jobsService.createJob({ payload });
+  if (res?.success) {
+    console.log("Posted SUccessfully");
+  } else {
+    console.log(res ? res.message : "Error");
+  }
+};
+
+export const getAllJobs = async ({
+  setJobs,
+  setLoading,
+}: {
+  setJobs: (jobs: Array<JobPayload>) => void;
+  setLoading: (bool: boolean) => void;
+}) => {
+  const res = await jobsService.getJobs();
+  if (res?.success) {
+    const { jobs } = res.data;
+    setJobs(jobs);
+  } else {
+    console.log(res ? res.message : "Error");
+  }
+  setLoading(false);
 };
