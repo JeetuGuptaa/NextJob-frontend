@@ -1,4 +1,5 @@
-export interface JobReqPayload {
+export interface JobInterface {
+  id?: string;
   role: string;
   desc: string;
   salary?: string;
@@ -14,7 +15,7 @@ export interface JobReqPayload {
   slug: string;
 }
 
-export interface JobPayload {
+export interface JobFormInterface {
   role: string;
   desc: string;
   salary?: string;
