@@ -1,7 +1,7 @@
 import { jobsService } from "../service";
-import { JobPayload, JobReqPayload } from "../types/jobs";
+import { JobFormInterface, JobInterface } from "../types/jobs";
 
-export const formatPayload = ({ jobObj }: { jobObj: JobPayload }) => {
+export const formatPayload = ({ jobObj }: { jobObj: JobFormInterface }) => {
   return {
     role: jobObj?.role?.trim(),
     desc: jobObj?.desc?.trim(),
@@ -19,7 +19,7 @@ export const formatPayload = ({ jobObj }: { jobObj: JobPayload }) => {
   };
 };
 
-export const createJob = async ({ payload }: { payload: JobReqPayload }) => {
+export const createJob = async ({ payload }: { payload: JobInterface }) => {
   const res = await jobsService.createJob({ payload });
   if (res?.success) {
     console.log("Posted SUccessfully");
@@ -32,7 +32,7 @@ export const getAllJobs = async ({
   setJobs,
   setLoading,
 }: {
-  setJobs: (jobs: Array<JobPayload>) => void;
+  setJobs: (jobs: Array<JobInterface>) => void;
   setLoading: (bool: boolean) => void;
 }) => {
   const res = await jobsService.getJobs();

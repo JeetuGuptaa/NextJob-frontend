@@ -1,8 +1,8 @@
 import axios from "axios";
-import { JobReqPayload } from "../types/jobs";
+import { JobInterface } from "../types/jobs";
 
 const jobsService = {
-  createJob: async ({ payload }: { payload: JobReqPayload }) => {
+  createJob: async ({ payload }: { payload: JobInterface }) => {
     const res = await axios.post(
       "http://localhost:3000/v1/jobs/create",
       payload

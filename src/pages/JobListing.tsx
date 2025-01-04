@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { getAllJobs } from "../utils";
-import { JobPayload } from "../types/jobs";
+import { JobInterface } from "../types/jobs";
+import JobCard from "../components/jobCard";
 
 export default function JobListing() {
-  const [jobs, setJobs] = useState<Array<JobPayload>>([]);
+  const [jobs, setJobs] = useState<Array<JobInterface>>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -11,8 +12,14 @@ export default function JobListing() {
   }, []);
   console.log(jobs);
   return (
-    <section>
-      <h1>Jobs Here</h1>
+    <section className="w-4/5 mx-auto flex flex-wrap gap-8 justify-between mt-8">
+      {loading ? (
+        <>Loading</>
+      ) : (
+        jobs.map((job) => {
+          return <JobCard job={job} key={job.id} />;
+        })
+      )}
     </section>
   );
 }
