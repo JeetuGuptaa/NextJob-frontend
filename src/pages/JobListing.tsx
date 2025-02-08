@@ -12,7 +12,7 @@ export default function JobListing() {
   useEffect(() => {
     getAllJobs({ setJobs, setLoading });
   }, []);
-  console.log(jobs);
+
   return (
     <section className="">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

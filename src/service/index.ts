@@ -13,6 +13,16 @@ const jobsService = {
     const res = await axios.get("http://localhost:3000/v1/jobs/all-jobs");
     return res?.data;
   },
+  getJob: async ({ id }: { id: string }) => {
+    const res = await axios.get(`http://localhost:3000/v1/jobs/${id}`);
+    return res?.data;
+  },
+  handleAnalytics: async ({ jobId }: { jobId: string }) => {
+    const res = await axios.get(
+      `http://localhost:3000/v1/jobs/increment-views/${jobId}`
+    );
+    return res?.data;
+  },
 };
 
 export { jobsService };
