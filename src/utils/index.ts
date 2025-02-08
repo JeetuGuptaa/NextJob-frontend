@@ -39,8 +39,35 @@ export const getAllJobs = async ({
   if (res?.success) {
     const { jobs } = res.data;
     setJobs(jobs);
+    setLoading(false);
   } else {
     console.log(res ? res.message : "Error");
   }
-  setLoading(false);
+};
+
+export const getJobDetails = async ({
+  id,
+  setLoading,
+  setJob,
+}: {
+  id: string;
+  setLoading: (bool: boolean) => void;
+  setJob: (job: JobInterface) => void;
+}) => {
+  const res = await jobsService.getJob({ id });
+  if (res?.success) {
+    const { job } = res?.data;
+    setJob(job);
+    setLoading(false);
+  } else {
+    console.log(res ? res.message : "Error");
+  }
+  return "";
+};
+
+export const handleAnalytics = async ({ jobId }: { jobId: string }) => {
+  const res = await jobsService.handleAnalytics({ jobId });
+  if (!res?.success) {
+    console.log(res ? res.message : "Error");
+  }
 };
