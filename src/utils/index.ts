@@ -1,7 +1,7 @@
 import { jobsService } from "../service";
-import { JobFormInterface, JobInterface } from "../types/jobs";
+import { JobInterface } from "../types/jobs";
 
-export const formatPayload = ({ jobObj }: { jobObj: JobFormInterface }) => {
+export const formatPayload = ({ jobObj }: { jobObj: any }) => {
   return {
     role: jobObj?.role?.trim(),
     desc: jobObj?.desc?.trim(),
@@ -19,7 +19,7 @@ export const formatPayload = ({ jobObj }: { jobObj: JobFormInterface }) => {
   };
 };
 
-export const createJob = async ({ payload }: { payload: JobInterface }) => {
+export const createJob = async ({ payload }: { payload: any }) => {
   const res = await jobsService.createJob({ payload });
   if (res?.success) {
     console.log("Posted SUccessfully");

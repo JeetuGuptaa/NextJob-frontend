@@ -1,9 +1,9 @@
 import axios from "axios";
-import { JobInterface } from "../types/jobs";
+import { JobFormInterface } from "../types/jobs";
 import { SERVER_BASE_URL } from "@/utils/constant";
 
 const jobsService = {
-  createJob: async ({ payload }: { payload: JobInterface }) => {
+  createJob: async ({ payload }: { payload: JobFormInterface }) => {
     const res = await axios.post(`${SERVER_BASE_URL}/v1/jobs/create`, payload);
     return res?.data;
   },
