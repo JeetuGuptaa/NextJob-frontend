@@ -12,8 +12,16 @@ import {
 
 export default function JobCard({ job }: { job: JobInterface }) {
   const { role, salary, location, jobType, company, date, slug } = job;
+  console.log(job);
   const navigate = useNavigate();
-
+  let numOfDays: number = 0;
+  console.log(date);
+  if (date) console.log(new Date(date).getDay());
+  console.log(new Date().getDay());
+  if (date)
+    numOfDays = Math.floor(
+      (Number(new Date()) - Number(new Date(date))) / (24 * 60 * 60 * 1000)
+    );
   return (
     <Card className="flex flex-col justify-between">
       <CardHeader>
@@ -26,7 +34,9 @@ export default function JobCard({ job }: { job: JobInterface }) {
         <p className="text-sm text-gray-600 mt-1">{jobType}</p>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <span className="text-sm text-gray-500">2 days ago</span>
+        <span className="text-sm text-gray-500">
+          {numOfDays > 0 ? `${numOfDays} days ago` : "Posted Recently"}
+        </span>
         <Button
           variant="outline"
           onClick={() => {

@@ -50,7 +50,7 @@ export const getJobDetails = async ({
   setLoading,
   setJob,
 }: {
-  id: string;
+  id: string | undefined;
   setLoading: (bool: boolean) => void;
   setJob: (job: JobInterface) => void;
 }) => {
@@ -70,4 +70,12 @@ export const handleAnalytics = async ({ jobId }: { jobId: string }) => {
   if (!res?.success) {
     console.log(res ? res.message : "Error");
   }
+};
+
+export const formatDate = (date: Date): string => {
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "2-digit",
+  });
 };

@@ -11,13 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import HandleAnalytics from "@/components/handleAnalyics";
 import Loader from "@/components/loader";
+import { formatDate } from "@/utils";
 
 export default function JobDescriptionPage() {
   let { id } = useParams();
   const [job, setJob] = useState<JobInterface>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  console.log(job);
 
   useEffect(() => {
     getJobDetails({ id, setLoading, setJob });
@@ -34,7 +36,9 @@ export default function JobDescriptionPage() {
           <>
             <Card>
               <CardHeader>
-                <CardTitle className="text-3xl font-bold">{job.role}</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  {job?.role}
+                </CardTitle>
                 <CardDescription className="text-xl">
                   {job?.company}
                 </CardDescription>
@@ -55,7 +59,11 @@ export default function JobDescriptionPage() {
                   </div>
                   <div className="flex items-center">
                     <Calendar className="mr-2 text-gray-500" />
-                    <span>Posted {"Recently"}</span>
+                    <span>
+                      {job?.date
+                        ? formatDate(new Date(job?.date))
+                        : "Posted Recently"}
+                    </span>
                   </div>
                 </div>
 
@@ -88,7 +96,6 @@ export default function JobDescriptionPage() {
                 </div>
               </CardContent>
             </Card>
-            <HandleAnalytics jobId={id} />
           </>
         )}
       </div>
