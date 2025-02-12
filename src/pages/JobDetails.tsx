@@ -1,7 +1,7 @@
 import { MapPin, Clock, DollarSign, Calendar } from "lucide-react";
 import { JobInterface } from "../types/jobs";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { getJobDetails } from "@/utils";
 import { Button } from "antd";
 import {
@@ -12,22 +12,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import HandleAnalytics from "@/components/handleAnalyics";
+import Loader from "@/components/loader";
 
 export default function JobDescriptionPage() {
   let { id } = useParams();
   const [job, setJob] = useState<JobInterface>();
   const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getJobDetails({ id, setLoading, setJob });
   }, []);
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 ">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {loading ? (
-          <>Loading...</>
+          <div className="w-full h-[50vh] flex justify-center items-center">
+            <Loader />
+          </div>
         ) : (
           <>
             <Card>
