@@ -13,6 +13,8 @@ export interface JobInterface {
   res?: [string];
   company: string;
   slug: string;
+  loc?: string;
+  link: string;
 }
 
 export interface JobFormInterface {

@@ -11,7 +11,7 @@ const jobsService = {
     const res = await axios.get(`${SERVER_BASE_URL}/v1/jobs/all-jobs`);
     return res?.data;
   },
-  getJob: async ({ id }: { id: string }) => {
+  getJob: async ({ id }: { id: string | undefined }) => {
     const res = await axios.get(`${SERVER_BASE_URL}/v1/jobs/${id}`);
     return res?.data;
   },
